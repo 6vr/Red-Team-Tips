@@ -1,0 +1,50 @@
+#Categorized
+https://github.com/mdsecactivebreach/Chameleon
+
+#Expired domains
+https://www.expireddomains.net/login/?signup=1
+
+#HTTPS Decryption
+
+#Filetype Filtering
+
+#DLP
+
+#Autentication
+----------------------------------
+#Find users privileges to proxy server - use Seatbelt or PowerView then make a Template Covenant
+
+StagerCode
+
+wc.UseDefaultCredentials = false;
+wc.Proxy = new WebProxy
+{
+    Address = new Uri("http://target:port"),
+    Credentials = new NetworkCredential
+    {
+        Domain = "DOMAIN",
+        UserName = "USER",
+        Password = "PASSWORD"
+    }
+};
+
+ ExecutorCode
+ 
+ this.CovenantClient.UseDefaultCredentials = false;
+this.CovenantClient.Proxy = new WebProxy
+{
+    Address = new Uri("http://target:port"),
+    Credentials = new NetworkCredential
+    {
+        Domain = "DOMAIN",
+        UserName = "USER",
+        Password = "PASSWORD"
+    }
+};
+ 
+ 
+ 
+
+
+
+

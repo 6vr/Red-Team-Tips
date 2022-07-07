@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31605.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipePipe", "PipePipe\PipePipe.csproj", "{A36CFF90-60FA-46F8-8F40-F76F1EF9FEBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A36CFF90-60FA-46F8-8F40-F76F1EF9FEBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A36CFF90-60FA-46F8-8F40-F76F1EF9FEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A36CFF90-60FA-46F8-8F40-F76F1EF9FEBE}.Debug|x64.ActiveCfg = Debug|x64
+		{A36CFF90-60FA-46F8-8F40-F76F1EF9FEBE}.Debug|x64.Build.0 = Debug|x64
+		{A36CFF90-60FA-46F8-8F40-F76F1EF9FEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A36CFF90-60FA-46F8-8F40-F76F1EF9FEBE}.Release|x64.ActiveCfg = Release|x64
+		{A36CFF90-60FA-46F8-8F40-F76F1EF9FEBE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C07CC1AB-0835-4B51-AE20-973B7D5731EA}
+	EndGlobalSection
+EndGlobal

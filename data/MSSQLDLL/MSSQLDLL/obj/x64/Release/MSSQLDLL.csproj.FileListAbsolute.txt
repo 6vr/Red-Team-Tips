@@ -1,0 +1,6 @@
+\\192.168.135.7\visualstudio\MSSQLDLL\MSSQLDLL\bin\x64\Release\MSSQLDLL.dll
+\\192.168.135.7\visualstudio\MSSQLDLL\MSSQLDLL\bin\x64\Release\MSSQLDLL.pdb
+\\192.168.135.7\visualstudio\MSSQLDLL\MSSQLDLL\obj\x64\Release\MSSQLDLL.csproj.AssemblyReference.cache
+\\192.168.135.7\visualstudio\MSSQLDLL\MSSQLDLL\obj\x64\Release\MSSQLDLL.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\MSSQLDLL\MSSQLDLL\obj\x64\Release\MSSQLDLL.dll
+\\192.168.135.7\visualstudio\MSSQLDLL\MSSQLDLL\obj\x64\Release\MSSQLDLL.pdb

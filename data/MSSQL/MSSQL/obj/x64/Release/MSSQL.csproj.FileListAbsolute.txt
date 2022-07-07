@@ -1,0 +1,7 @@
+\\192.168.135.7\visualstudio\MSSQL\MSSQL\bin\x64\Release\MSSQL.exe.config
+\\192.168.135.7\visualstudio\MSSQL\MSSQL\bin\x64\Release\MSSQL.exe
+\\192.168.135.7\visualstudio\MSSQL\MSSQL\bin\x64\Release\MSSQL.pdb
+\\192.168.135.7\visualstudio\MSSQL\MSSQL\obj\x64\Release\MSSQL.csproj.AssemblyReference.cache
+\\192.168.135.7\visualstudio\MSSQL\MSSQL\obj\x64\Release\MSSQL.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\MSSQL\MSSQL\obj\x64\Release\MSSQL.exe
+\\192.168.135.7\visualstudio\MSSQL\MSSQL\obj\x64\Release\MSSQL.pdb

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31605.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoPsExec", "NoPsExec\NoPsExec.csproj", "{188AE6B3-8708-47FA-92B9-E8470003CD91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{188AE6B3-8708-47FA-92B9-E8470003CD91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{188AE6B3-8708-47FA-92B9-E8470003CD91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{188AE6B3-8708-47FA-92B9-E8470003CD91}.Debug|x64.ActiveCfg = Debug|x64
+		{188AE6B3-8708-47FA-92B9-E8470003CD91}.Debug|x64.Build.0 = Debug|x64
+		{188AE6B3-8708-47FA-92B9-E8470003CD91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{188AE6B3-8708-47FA-92B9-E8470003CD91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{188AE6B3-8708-47FA-92B9-E8470003CD91}.Release|x64.ActiveCfg = Release|x64
+		{188AE6B3-8708-47FA-92B9-E8470003CD91}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3933A603-161C-447B-94FC-3C7BC12BC4E5}
+	EndGlobalSection
+EndGlobal

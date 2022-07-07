@@ -1,0 +1,36 @@
+#Domain Reconnaissance
+Powerview
+https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1
+https://github.com/PowerShellMafia/PowerSploit/tree/dev/Recon
+#SharpView
+https://github.com/tevora-threat/SharpView
+---
+Use PowerShellImport (for Covenant) or powershell-import (for Cobalt Strike) with PowerSploit > Recon > PowerView.ps1.
+---
+Covenant
+PowerShell Get-Domain
+Get-DomainController | Select-Object Forest, Name, OSVersion
+PowerShell Get-ForestDomain
+PowerShell Get-DomainPolicy | Select-Object -ExpandProperty SystemAccess
+PowerShell Get-DomainUser -Identity j.hunt -Properties DisplayName, MemberOf | Format-List
+PowerShell Get-DomainComputer -Properties DnsHostName | Sort-Object -Property DnsHostName
+PowerShell Get-DomainOU -Properties Name | Sort-Object -Property Name
+PowerShell Get-DomainGroup -Identity 'Domain Admins' | Select-Object -ExpandProperty Member
+PowerShell Get-DomainGroupMember -Identity 'Domain Admins' | Select-Object MemberDistinguishedName
+PowerShell Get-DomainGPO -Properties DisplayName | Sort-Object -Property DisplayName
+PowerShell Get-DomainGPO -ComputerIdentity wkstn-1555 -Properties DisplayName | Sort-Object -Property DisplayName
+PowerShell Get-DomainGPOLocalGroup | Select-Object GPODisplayName, GroupName
+PowerShell Find-DomainUserLocation | Select-Object UserName, SessionFromName
+PowerShell Get-NetLocalGroup | Select-Object GroupName
+PowerShell Get-NetLocalGroupMember -GroupName Administrators | Select-Object MemberName, IsGroup, IsDomain
+PowerShell Get-NetLoggedOn
+PowerShell Get-NetSession -ComputerName fs-1 | Select-Object CName, UserName
+PowerShell Get-DomainTrust
+
+The best way 
+BloodHound
+Assembly /assemblyname:"SharpHound3" /parameters:"-c All GPOLocalGroup"
+"Execute bloohound with user with more privileges , the result will be diferent"
+
+
+

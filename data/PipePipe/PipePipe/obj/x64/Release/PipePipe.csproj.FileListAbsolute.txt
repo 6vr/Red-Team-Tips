@@ -1,0 +1,7 @@
+\\192.168.135.7\visualstudio\PipePipe\PipePipe\bin\x64\Release\PipePipe.exe.config
+\\192.168.135.7\visualstudio\PipePipe\PipePipe\bin\x64\Release\PipePipe.exe
+\\192.168.135.7\visualstudio\PipePipe\PipePipe\bin\x64\Release\PipePipe.pdb
+\\192.168.135.7\visualstudio\PipePipe\PipePipe\obj\x64\Release\PipePipe.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\PipePipe\PipePipe\obj\x64\Release\PipePipe.exe
+\\192.168.135.7\visualstudio\PipePipe\PipePipe\obj\x64\Release\PipePipe.pdb
+\\192.168.135.7\visualstudio\PipePipe\PipePipe\obj\x64\Release\PipePipe.csproj.AssemblyReference.cache

@@ -1,0 +1,7 @@
+\\192.168.135.7\visualstudio\ConsoleAppDLLi\ConsoleAppDLLi\bin\x64\Release\ConsoleAppDLLi.exe.config
+\\192.168.135.7\visualstudio\ConsoleAppDLLi\ConsoleAppDLLi\bin\x64\Release\ConsoleAppDLLi.exe
+\\192.168.135.7\visualstudio\ConsoleAppDLLi\ConsoleAppDLLi\bin\x64\Release\ConsoleAppDLLi.pdb
+\\192.168.135.7\visualstudio\ConsoleAppDLLi\ConsoleAppDLLi\obj\x64\Release\ConsoleAppDLLi.csproj.AssemblyReference.cache
+\\192.168.135.7\visualstudio\ConsoleAppDLLi\ConsoleAppDLLi\obj\x64\Release\ConsoleAppDLLi.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\ConsoleAppDLLi\ConsoleAppDLLi\obj\x64\Release\ConsoleAppDLLi.exe
+\\192.168.135.7\visualstudio\ConsoleAppDLLi\ConsoleAppDLLi\obj\x64\Release\ConsoleAppDLLi.pdb

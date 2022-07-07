@@ -1,0 +1,7 @@
+\\192.168.135.7\visualstudio\SharpUp\SharpUp\bin\x64\Release\SharpUp.exe.config
+\\192.168.135.7\visualstudio\SharpUp\SharpUp\bin\x64\Release\SharpUp.exe
+\\192.168.135.7\visualstudio\SharpUp\SharpUp\bin\x64\Release\SharpUp.pdb
+\\192.168.135.7\visualstudio\SharpUp\SharpUp\obj\x64\Release\SharpUp.csproj.AssemblyReference.cache
+\\192.168.135.7\visualstudio\SharpUp\SharpUp\obj\x64\Release\SharpUp.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\SharpUp\SharpUp\obj\x64\Release\SharpUp.exe
+\\192.168.135.7\visualstudio\SharpUp\SharpUp\obj\x64\Release\SharpUp.pdb

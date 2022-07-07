@@ -1,0 +1,22 @@
+-------------------------------------Recond DNS ---------------------------------------
+dig target + short
+dnsenum target
+" Find interestings ISP + take IP ranges + Find interestings service email such as Office365 - Google GSuite - OVA - Cisco -VPN - Citrix
+------------------------------------
+check all results ips to take the range
+whois ip
+------------------------------------
+Take all subdomains
+assetfinder 
+amass
+dnscan
+oneforall
+sublist3r
+subfinder
+dnsdumpter.com + ip + technologies + services
+osint.sh       + ip + technologies + services + historyDns
+------------------------------------
+Permute all subdomains to take more results and take brute force to all domains and subdomains
+dnsgen
+subbrute
+

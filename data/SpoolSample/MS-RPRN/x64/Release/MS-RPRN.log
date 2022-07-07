@@ -1,0 +1,34 @@
+﻿  64 bit Processing .\ms-rprn.idl
+  ms-rprn.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\oaidl.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\objidl.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\unknwn.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\wtypes.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\wtypesbase.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\basetsd.h
+  64 bit Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\guiddef.h
+  64 bit Processing C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\oaidl.acf
+  oaidl.idl
+  objidl.idl
+  unknwn.idl
+  wtypes.idl
+  wtypesbase.idl
+  basetsd.h
+  guiddef.h
+  oaidl.acf
+  stdafx.cpp
+  main.cpp
+  ms-rprn_c.c
+     Creating library C:\Tools\SpoolSample\x64\Release\MS-RPRN.lib and object C:\Tools\SpoolSample\x64\Release\MS-RPRN.exp
+  Generating code
+  Finished generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 15 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  MS-RPRN.vcxproj -> C:\Tools\SpoolSample\x64\Release\MS-RPRN.dll
+  (Post Build) Generating Data.cs for the SpoolSample project
+  File C:\Tools\SpoolSample\Out-CSharpDataClass.ps1 cannot be loaded because running scripts is disabled on this system. 
+  For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
+      + CategoryInfo          : SecurityError: (:) [], ParentContainsErrorRecordException
+      + FullyQualifiedErrorId : UnauthorizedAccess
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(155,5): error MSB3073: The command "powershell.exe -File "C:\Tools\SpoolSample\\Out-CSharpDataClass.ps1" -Target "C:\Tools\SpoolSample\x64\Release\MS-RPRN.dll" -SolutionDir "C:\Tools\SpoolSample\"
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(155,5): error MSB3073: :VCEnd" exited with code 1.

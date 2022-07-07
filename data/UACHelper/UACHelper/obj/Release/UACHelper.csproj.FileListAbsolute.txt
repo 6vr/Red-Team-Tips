@@ -1,0 +1,7 @@
+\\192.168.135.7\visualstudio\UACHelper\UACHelper\bin\Release\UACHelper.exe.config
+\\192.168.135.7\visualstudio\UACHelper\UACHelper\bin\Release\UACHelper.exe
+\\192.168.135.7\visualstudio\UACHelper\UACHelper\bin\Release\UACHelper.pdb
+\\192.168.135.7\visualstudio\UACHelper\UACHelper\obj\Release\UACHelper.csproj.AssemblyReference.cache
+\\192.168.135.7\visualstudio\UACHelper\UACHelper\obj\Release\UACHelper.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\UACHelper\UACHelper\obj\Release\UACHelper.exe
+\\192.168.135.7\visualstudio\UACHelper\UACHelper\obj\Release\UACHelper.pdb

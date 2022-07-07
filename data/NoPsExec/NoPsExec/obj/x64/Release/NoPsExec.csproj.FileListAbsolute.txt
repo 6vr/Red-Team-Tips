@@ -1,0 +1,7 @@
+\\192.168.135.7\visualstudio\NoPsExec\NoPsExec\bin\x64\Release\NoPsExec.exe.config
+\\192.168.135.7\visualstudio\NoPsExec\NoPsExec\bin\x64\Release\NoPsExec.exe
+\\192.168.135.7\visualstudio\NoPsExec\NoPsExec\bin\x64\Release\NoPsExec.pdb
+\\192.168.135.7\visualstudio\NoPsExec\NoPsExec\obj\x64\Release\NoPsExec.csproj.AssemblyReference.cache
+\\192.168.135.7\visualstudio\NoPsExec\NoPsExec\obj\x64\Release\NoPsExec.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\NoPsExec\NoPsExec\obj\x64\Release\NoPsExec.exe
+\\192.168.135.7\visualstudio\NoPsExec\NoPsExec\obj\x64\Release\NoPsExec.pdb

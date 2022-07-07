@@ -1,0 +1,10 @@
+\\192.168.135.7\visualstudio\Runspace\Runspace\bin\x64\Release\Runspace.exe.config
+\\192.168.135.7\visualstudio\Runspace\Runspace\bin\x64\Release\Runspace.exe
+\\192.168.135.7\visualstudio\Runspace\Runspace\bin\x64\Release\Runspace.pdb
+\\192.168.135.7\visualstudio\Runspace\Runspace\bin\x64\Release\System.Management.Automation.dll
+\\192.168.135.7\visualstudio\Runspace\Runspace\obj\x64\Release\Runspace.csproj.AssemblyReference.cache
+\\192.168.135.7\visualstudio\Runspace\Runspace\obj\x64\Release\Runspace.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\Runspace\Runspace\obj\x64\Release\Runspace.csproj.CopyComplete
+\\192.168.135.7\visualstudio\Runspace\Runspace\obj\x64\Release\Runspace.exe
+\\192.168.135.7\visualstudio\Runspace\Runspace\obj\x64\Release\Runspace.pdb
+\\192.168.135.7\visualstudio\Runspace\Runspace\bin\x64\Release\Microsoft.PowerShell.ConsoleHost.dll

@@ -1,0 +1,6 @@
+\\192.168.135.7\visualstudio\ClassLibrary1\ClassLibrary1\bin\x64\Release\ClassLibrary1.dll
+\\192.168.135.7\visualstudio\ClassLibrary1\ClassLibrary1\bin\x64\Release\ClassLibrary1.pdb
+\\192.168.135.7\visualstudio\ClassLibrary1\ClassLibrary1\obj\x64\Release\ClassLibrary1.csproj.AssemblyReference.cache
+\\192.168.135.7\visualstudio\ClassLibrary1\ClassLibrary1\obj\x64\Release\ClassLibrary1.csproj.CoreCompileInputs.cache
+\\192.168.135.7\visualstudio\ClassLibrary1\ClassLibrary1\obj\x64\Release\ClassLibrary1.dll
+\\192.168.135.7\visualstudio\ClassLibrary1\ClassLibrary1\obj\x64\Release\ClassLibrary1.pdb
